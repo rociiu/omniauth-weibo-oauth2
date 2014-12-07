@@ -39,7 +39,7 @@ module OmniAuth
       def raw_info
         access_token.options[:mode] = :query
         access_token.options[:param_name] = 'access_token'
-        @uid ||= access_token.get('/oauth2/get_token_info.json').parsed["uid"]
+        @uid ||= access_token.post('/oauth2/get_token_info.json').parsed["uid"]
         @raw_info ||= access_token.get("/2/users/show.json", :params => {:uid => @uid}).parsed
       end
 
