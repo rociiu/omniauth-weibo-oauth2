@@ -39,7 +39,7 @@ module OmniAuth
       def raw_info
         access_token.options[:mode] = :query
         access_token.options[:param_name] = 'access_token'
-        @uid ||= JSON.parse(Faraday.post('https://api.weibo.com/oauth2/get_token_info.json', {access_token: access_token.token}).body)["uid"]
+        @uid ||= JSON.parse(Faraday.post('https://api.weibo.com/oauth2/get_token_info', {access_token: access_token.token}).body)["uid"]
         @raw_info ||= access_token.get("/2/users/show.json", :params => {:uid => @uid}).parsed
       end
 
